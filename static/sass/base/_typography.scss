@@ -1,12 +1,23 @@
 /* Tipografía */
 @use 'sass:list';
+@use '../base/variables' as var;
 
-$font-sizes: 0.875rem, 1rem, 1.25rem, 1.5rem, 2rem;
 
-@each $size in $font-sizes {
-    $index: list.index($font-sizes, $size);
+$font-sizes: (
+  1: 0.875rem,
+  2: 1rem,
+  3: 1.25rem,
+  4: 1.50rem,
+  5: 2rem
+);
 
-    ​ .fs-#{$index} {
-        font-size: $size;
+// Generar clases responsivas con media queries
+@each $breakpoint, $size in var.$breakpoints {
+    @media (min-width: $size) {
+      @each $index, $font-size in $font-sizes {
+        .fs-#{$breakpoint}-#{$index} {
+          font-size: $font-size;
+        }
+      }
     }
 }
