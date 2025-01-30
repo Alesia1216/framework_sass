@@ -30,3 +30,22 @@
         padding-inline: calc(var(--gutter-x)/2);
     }
 }
+
+// Tamaños de gutter personalizados
+$gutters: (
+    1: 8px,
+    2: 16px,
+    3: 32px,
+    4: 64px,
+    5: 128px
+);
+
+@each $index, $size in $gutters {
+    .gx-#{$index} {
+        --gutter-x: #{$size};
+    }
+
+    .gy-#{$index} {
+        --gutter-y: #{$size};
+    }
+}
