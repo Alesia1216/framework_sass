@@ -6,21 +6,82 @@
     <title>FrameworkSass</title>
 
     <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .row {
+            display: flex;
+            margin-left: calc(var(--gutter-x) / -2);
+            margin-right: calc(var(--gutter-x) / -2);
+            margin-top: calc(var(--gutter-y) / -2);
+            margin-bottom: calc(var(--gutter-y) / -2);
+            width: 100%;
+        }
+
+        .col {
+            flex: 1;
+            padding: calc(var(--gutter-x) / 2) calc(var(--gutter-x) / 2);
+            border: 1px solid #ccc;
+            margin-top: calc(var(--gutter-y) / 2);
+            text-align: center;
+        }
+
+        .box {
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container gx-sm-3 gy-sm-2">
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <div class="box">1</div>
+            <div class="col box">
+                <p>Columna 1</p>
             </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <div class="box">2</div>
+            <div class="col box">
+                <p>Columna 2</p>
             </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <div class="box">3</div>
+            <div class="col box">
+                <p>Columna 3</p>
             </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-                <div class="box">4</div>
+        </div>
+    </div>
+    
+    <div class="container gx-md-4 gy-md-3">
+        <div class="row">
+            <div class="col box">
+                <p>Columna 1</p>
+            </div>
+            <div class="col box">
+                <p>Columna 2</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container gx-lg-5 gy-lg-4">
+        <div class="row">
+            <div class="col box">
+                <p>Columna 1</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container gx-xl-2 gy-xl-1">
+        <div class="row">
+            <div class="col box">
+                <p>Columna 1</p>
+            </div>
+            <div class="col box">
+                <p>Columna 2</p>
+            </div>
+            <div class="col box">
+                <p>Columna 3</p>
+            </div>
+            <div class="col box">
+                <p>Columna 4</p>
             </div>
         </div>
     </div>

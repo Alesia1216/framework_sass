@@ -1,10 +1,10 @@
 @use '../base/variables' as vars;
 @use 'sass:math';
 
-$row-gutter: 8px;
-$grid-columns: 12;
-
 // Estilo general de la fila
+$row-gutter: 8px;
+$grid-columns: vars.$grid-columns; // Usando el valor de $grid-columns desde _variables.scss
+
 .row {
     --gutter-x: #{$row-gutter};
     --gutter-y: #{$row-gutter};
@@ -37,16 +37,8 @@ $grid-columns: 12;
     }
 }
 
-// Breakpoints
-$breakpoints: (
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px
-);
-
-// Generación de clases para breakpoints
-@each $size, $width in $breakpoints {
+// Generación de clases para breakpoints usando las variables importadas
+@each $size, $width in vars.$breakpoints {
     @for $i from 1 through $grid-columns {
         .col-#{$size}-#{$i} {
             @media (min-width: #{$width}) {
@@ -59,6 +51,7 @@ $breakpoints: (
 
 // Tamaños de gutter personalizados
 $gutters: (
+    0: 0px,
     1: 8px,
     2: 16px,
     3: 32px,
@@ -73,5 +66,22 @@ $gutters: (
 
     .gy-#{$index} {
         --gutter-y: #{$size};
+    }
+}
+
+// Breakpoints específicos para gutters
+@each $breakpoint, $width in vars.$breakpoints {
+    @each $index, $size in $gutters {
+        .gx-#{$breakpoint}-#{$index} {
+            @media (min-width: #{$width}) {
+                --gutter-x: #{$size};
+            }
+        }
+
+        .gy-#{$breakpoint}-#{$index} {
+            @media (min-width: #{$width}) {
+                --gutter-y: #{$size};
+            }
+        }
     }
 }
