@@ -1,6 +1,9 @@
 @use '../base/variables' as vars;
 @use 'sass:math';
 
+// Variable global para controlar la generación de clases responsive
+$generate-responsive-classes: true;
+
 // Estilo general de la fila
 $row-gutter: 8px;
 $grid-columns: vars.$grid-columns; // Usando el valor de $grid-columns desde _variables.scss
@@ -38,12 +41,14 @@ $grid-columns: vars.$grid-columns; // Usando el valor de $grid-columns desde _va
 }
 
 // Generación de clases para breakpoints usando las variables importadas
-@each $size, $width in vars.$breakpoints {
-    @for $i from 1 through $grid-columns {
-        .col-#{$size}-#{$i} {
-            @media (min-width: #{$width}) {
-                width: math.div(100%, $grid-columns) * $i;
-                padding-inline: calc(var(--gutter-x) / 2);
+@if $generate-responsive-classes {
+    @each $size, $width in vars.$breakpoints {
+        @for $i from 1 through $grid-columns {
+            .col-#{$size}-#{$i} {
+                @media (min-width: #{$width}) {
+                    width: math.div(100%, $grid-columns) * $i;
+                    padding-inline: calc(var(--gutter-x) / 2);
+                }
             }
         }
     }
@@ -70,17 +75,19 @@ $gutters: (
 }
 
 // Breakpoints específicos para gutters
-@each $breakpoint, $width in vars.$breakpoints {
-    @each $index, $size in $gutters {
-        .gx-#{$breakpoint}-#{$index} {
-            @media (min-width: #{$width}) {
-                --gutter-x: #{$size};
+@if $generate-responsive-classes {
+    @each $breakpoint, $width in vars.$breakpoints {
+        @each $index, $size in $gutters {
+            .gx-#{$breakpoint}-#{$index} {
+                @media (min-width: #{$width}) {
+                    --gutter-x: #{$size};
+                }
             }
-        }
 
-        .gy-#{$breakpoint}-#{$index} {
-            @media (min-width: #{$width}) {
-                --gutter-y: #{$size};
+            .gy-#{$breakpoint}-#{$index} {
+                @media (min-width: #{$width}) {
+                    --gutter-y: #{$size};
+                }
             }
         }
     }
